@@ -18,7 +18,7 @@ namespace Discord.Interactions.Builders
         {
             static bool IsLoadableModule(TypeInfo info)
             {
-                return info.DeclaredMethods.Any(x => x.GetCustomAttribute<SlashCommandAttribute>() != null);
+                return !info.IsAbstract && info.DeclaredMethods.Any(x => x.GetCustomAttribute<SlashCommandAttribute>() != null);
             }
 
             var result = new List<TypeInfo>();
