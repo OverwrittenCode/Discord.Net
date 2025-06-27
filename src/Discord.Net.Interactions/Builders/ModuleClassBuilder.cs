@@ -18,7 +18,11 @@ namespace Discord.Interactions.Builders
         {
             static bool IsLoadableModule(TypeInfo info)
             {
-                return !info.IsAbstract && info.DeclaredMethods.Any(x => x.GetCustomAttribute<SlashCommandAttribute>() != null);
+               return !info.IsAbstract && info.DeclaredMethods.SelectMany(x => x.GetCustomAttributes()).Any(x => x switch
+    {
+        SlashCommandAttribute or ComponentInteractionAttribute or ContextCommandAttribute or AutocompleteCommandAttribute or ModalInteractionAttribute => true,
+        _ => false
+    });
             }
 
             var result = new List<TypeInfo>();
