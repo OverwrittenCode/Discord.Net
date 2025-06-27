@@ -63,7 +63,7 @@ namespace Discord.Interactions.Builders
                 result.Add(type.AsType(), moduleInfo);
             }
 
-            await commandService._cmdLogger.DebugAsync($"Successfully built {built.Count} Slash Command modules.").ConfigureAwait(false);
+            await commandService._cmdLogger.DebugAsync($"Successfully built {built.Count} interaction modules.").ConfigureAwait(false);
 
             return result;
         }
