@@ -16,14 +16,15 @@ namespace Discord.Interactions.Builders
 
         public static async Task<IEnumerable<TypeInfo>> SearchAsync(Assembly assembly, InteractionService commandService)
         {
-            static bool IsLoadableModule(TypeInfo info)
-            {
-               return !info.IsAbstract && info.DeclaredMethods.SelectMany(x => x.GetCustomAttributes()).Any(x => x switch
-    {
-        SlashCommandAttribute or ComponentInteractionAttribute or ContextCommandAttribute or AutocompleteCommandAttribute or ModalInteractionAttribute => true,
-        _ => false
-    });
-            }
+            static bool IsLoadableModule(TypeInfo info) =>
+                !info.IsAbstract &&
+                info.DeclaredMethods
+                    .SelectMany(x => x.GetCustomAttributes())
+                    .Any(x => x is SlashCommandAttribute
+                                or ComponentInteractionAttribute
+                                or ContextCommandAttribute
+                                or AutocompleteCommandAttribute
+                                or ModalInteractionAttribute);
 
             var result = new List<TypeInfo>();
 
