@@ -19,7 +19,6 @@ jobs:
           ArtifactStagingDirectory: "artifacts"
           IsTagBuild: false
           DOTNET_INSTALL_DIR: "/usr/share/dotnet"
-          Suffix: ${{ github.run_number }}
         steps:
           - uses: actions/checkout@v4    
           
